@@ -62,20 +62,15 @@ nano hosts.ini
 chmod +x add-key.sh && ./add-key.sh
 ```
 
-4. **Run** a dry run of the Ansible playbook against the hosts.ini. Change XXXXX to your registration code from [dashboard](https://nodes.presearch.com/dashboard?rid=4613404). 
+4. **Run the playbook for real and create new Presearch nodes.** Change XXXXX to your registration code from [dashboard](https://nodes.presearch.com/dashboard?rid=4613404).
+
 ![image](https://github.com/88plug/presearch-node-ansible-playbook/assets/19512127/63b853a7-aa42-4347-96cb-fb26ac299aae)
-
-```
-ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX" --check
-```
-
-5. **Run the playbook for real and create new Presearch nodes.**
 ```
 ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX"
 ```
 
-6. **[Check Presearch Dashboard](https://nodes.presearch.com/dashboard?rid=4613404)** You should see the new nodes appear after each succesful installation.
+5. **[Check Presearch Dashboard](https://nodes.presearch.com/dashboard?rid=4613404)** You should see the new nodes appear after each succesful installation.
 
-7. **Click** Stake button next to each node to add at least 4,000 PRE and update the description with a user-friendly name.
-8. **Click** Stats button next to each node to see IP address and other information.
+6. **Click** Stake button next to each node to add at least 4,000 PRE and update the description with a user-friendly name.
+7. **Click** Stats button next to each node to see IP address and other information.
 
