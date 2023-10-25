@@ -12,13 +12,13 @@
      ```bash
      apt-get install ansible
      ```
-2. **VPS Configuration**:
-   - Requires at least one VPS.
-   - Freshly installed with either Debian 9/10 or Ubuntu Server 18.04/20.04.
+
+2. **VPS/VM Minimum Requirements**:
+   - 1 CPU | 1GB Memory | 10GB SSD/NVMe Disk
+   - Debian 9/10 or Ubuntu Server 18.04/20.04
 
 3. **IP Configuration**:
    - Currently supports a single IPv4 address only per VPS.
-
 
 ### **VPS Provider Recommendations:**
 [HostHatch](https://cloud.hosthatch.com/a/1577) |
@@ -26,12 +26,13 @@
 [Vultr](https://www.vultr.com/?ref=7703094) |
 [DigitalOcean](https://m.do.co/c/d9874e8ceba7)
 
-## Installation: 
+
+## Installation:
 
 1. **Create a hosts.ini** in the following format. 
 ```
 [presearch-nodes]
-#Hosted on the Akash.Network/Racknerd...etc
+#New VPS/VM for Presearch
 root@x.x.x.x
 root@x.x.x.x
 root@x.x.x.x
@@ -70,6 +71,6 @@ echo "Process completed."
 5. If there are no errors, remove `--check` and run `ansible-playbook -i hosts.ini playbook.yml`
 
 -
-## Skip the line: [Akash.Network](https://deploy.cloudmos.io/templates/akash-network-awesome-akash-presearch)
+## : [Akash.Network](https://deploy.cloudmos.io/templates/akash-network-awesome-akash-presearch)
 ### Deploy a Presearch node to a decentralized provider in just a few clicks. Using [Keplr](https://keplr.app) wallet bridge Cosmos (ATOM) to Akash (AKT). Then deploy and scale on [https://deploy.cloudmos.io](https://deploy.cloudmos.io)
 
