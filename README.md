@@ -38,13 +38,9 @@ git clone https://github.com/88plug/presearch-node-ansible-playbook
 cd presearch-node-ansible-playbook
 ```
 
-2. **Create a hosts.ini** in the following format. 
+2. **Edit** hosts.ini and update with your IP addresses
 ```
-[presearch-nodes]
-#New VPS/VM for Presearch
-root@x.x.x.x
-root@x.x.x.x
-root@x.x.x.x
+nano hosts.ini
 ```
 
 3. **Run** Enter the password for each server when prompted.
