@@ -53,10 +53,13 @@ chmod +x add-key.sh && ./add-key.sh
 ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX --check
 ```
 
-5. **Run** If there are no errors, remove the `--check`:
+5. **Run** the playbook for real and create new Presearch nodes.
 ```
 ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX
 ```
+6. **[Check Presearch Dashboard](https://nodes.presearch.com/dashboard?rid=4613404)** You should see the new nodes appear after each succesful installation.
+7. **Problems?** If you encounter a problem, you can reverse the Playbook.
+
 
 ## Still can't figure it out? : 
 ### Deploy a Presearch node to a decentralized provider in just a few clicks. Using [Keplr](https://keplr.app) wallet bridge Cosmos (ATOM) to Akash (AKT). Then deploy and scale on [https://deploy.cloudmos.io](https://deploy.cloudmos.io/templates/akash-network-awesome-akash-presearch)
