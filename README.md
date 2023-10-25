@@ -78,5 +78,5 @@ echo "Process completed."
 6. If there are no errors, remove `--check` and run `ansible-playbook -i hosts.ini playbook.yml`
 
 ## Still can't figure it out? : [Akash.Network](https://deploy.cloudmos.io/templates/akash-network-awesome-akash-presearch)
-### Deploy a Presearch node to a decentralized provider in just a few clicks. Using [Keplr](https://keplr.app) wallet bridge Cosmos (ATOM) to Akash (AKT). Then deploy and scale on [https://deploy.cloudmos.io](https://deploy.cloudmos.io)
+### Deploy a Presearch node to a decentralized provider in just a few clicks. Using [Keplr](https://keplr.app) wallet bridge Cosmos (ATOM) to Akash (AKT). Then deploy and scale on [https://deploy.cloudmos.io](https://deploy.cloudmos.io/templates/akash-network-awesome-akash-presearch)
 
