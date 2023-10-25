@@ -4,7 +4,10 @@
 
 # Prerequisites for Setup:
 
-1. **Control Machine**: 
+1. **[Presearch Account](https://presearch.com/signup?rid=4613404)**: Signup and then goto the [dashboard](https://nodes.presearch.com/dashboard?rid=4613404). Copy and Save this to the side - we will need it later.
+
+
+2. **Control Machine**: 
    - Must be Linux-based.
    - Used to generate the `hosts.ini` file.
    - This is where you'll run the Ansible Playbook targeting the VPS.
@@ -13,11 +16,11 @@
      apt-get install ansible
      ```
 
-2. **VPS/VM Minimum Requirements**:
+3. **VPS/VM Minimum Requirements**:
    - 1 CPU | 1GB Memory | 10GB SSD/NVMe Disk
    - Debian 9/10 or Ubuntu Server 18.04/20.04
 
-3. **IP Configuration**:
+4. **IP Configuration**:
    - Currently supports a single IPv4 address only per VPS.
 
 ### **VPS Provider Recommendations:**
@@ -48,19 +51,18 @@ nano hosts.ini
 chmod +x add-key.sh && ./add-key.sh
 ```
 
-4. **Run** a dry run of the Ansible Playbook against the hosts.ini.
+4. **Run** a dry run of the Ansible playbook against the hosts.ini. Change XXXXX to your registration code from [dashboard](https://nodes.presearch.com/dashboard?rid=4613404). 
+![image](https://github.com/88plug/presearch-node-ansible-playbook/assets/19512127/63b853a7-aa42-4347-96cb-fb26ac299aae)
+
 ```
-ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX --check
+ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX" --check
 ```
 
-5. **Run** the playbook for real and create new Presearch nodes.
+5. **Run the playbook for real and create new Presearch nodes.**
 ```
-ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX
+ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX"
 ```
+
 6. **[Check Presearch Dashboard](https://nodes.presearch.com/dashboard?rid=4613404)** You should see the new nodes appear after each succesful installation.
+
 7. **Problems?** If you encounter a problem, you can reverse the Playbook.
-
-
-## Still can't figure it out? : 
-### Deploy a Presearch node to a decentralized provider in just a few clicks. Using [Keplr](https://keplr.app) wallet bridge Cosmos (ATOM) to Akash (AKT). Then deploy and scale on [https://deploy.cloudmos.io](https://deploy.cloudmos.io/templates/akash-network-awesome-akash-presearch)
-
