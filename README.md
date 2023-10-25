@@ -29,7 +29,14 @@
 
 ## Installation:
 
-1. **Create a hosts.ini** in the following format. 
+1.  **On the control machine**:
+
+```
+git clone https://github.com/88plug/presearch-node-ansible-playbook
+cd presearch-node-ansible-playbook
+```
+
+2. **Create a hosts.ini** in the following format. 
 ```
 [presearch-nodes]
 #New VPS/VM for Presearch
@@ -38,7 +45,7 @@ root@x.x.x.x
 root@x.x.x.x
 ```
 
-2. **Create add-key.sh** which will add your public key to each VPS.
+3. **Create add-key.sh** which will add your public key to each VPS.
 ```
 #!/bin/bash
 
@@ -66,9 +73,9 @@ done
 echo "Process completed."
 ```
 
-3. Run `chmod +x add-key.sh && ./add-key.sh`. Enter the password for each server when prompted.
-4. Run `ansible-playbook -i hosts.ini playbook.yml --check` to dry run the Ansible Playbook against the hosts.ini.
-5. If there are no errors, remove `--check` and run `ansible-playbook -i hosts.ini playbook.yml`
+4. Run `chmod +x add-key.sh && ./add-key.sh`. Enter the password for each server when prompted.
+5. Run `ansible-playbook -i hosts.ini playbook.yml --check` to dry run the Ansible Playbook against the hosts.ini.
+6. If there are no errors, remove `--check` and run `ansible-playbook -i hosts.ini playbook.yml`
 
 -
 ## : [Akash.Network](https://deploy.cloudmos.io/templates/akash-network-awesome-akash-presearch)
