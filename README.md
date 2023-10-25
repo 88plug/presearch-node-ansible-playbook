@@ -47,9 +47,12 @@ root@x.x.x.x
 root@x.x.x.x
 ```
 
-3. **Run** `chmod +x add-key.sh && ./add-key.sh`. Enter the password for each server when prompted.
+3. **Run** Enter the password for each server when prompted.
+```
+chmod +x add-key.sh && ./add-key.sh
+```.
 
-4. **Run** a dry run of the Ansible Playbook against the hosts.ini.
+5. **Run** a dry run of the Ansible Playbook against the hosts.ini.
 ```
 ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX --check
 ```
