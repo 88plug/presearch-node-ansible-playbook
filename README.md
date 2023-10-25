@@ -20,7 +20,7 @@
 3. **IP Configuration**:
    - Currently supports a single IPv4 address only per VPS.
 
-### **VPS Provider Recommendations: Annual and Bi-Annual on Hosthatch and Racknerd have signifigant discounts.**
+### **VPS Provider Recommendations:**
 [HostHatch](https://cloud.hosthatch.com/a/1577) |
 [Racknerd](https://my.racknerd.com/aff.php?aff=9475) |
 [Vultr](https://www.vultr.com/?ref=7703094) |
