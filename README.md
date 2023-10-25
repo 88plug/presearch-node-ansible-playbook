@@ -21,7 +21,7 @@
 
 3. **Control Machine**: 
    - Must be Linux-based.
-   - Used to generate the `hosts.ini` file.
+   - Used to edit the `hosts.ini` file.
    - This is where you'll run the Ansible Playbook targeting the VPS.
    - Ensure Ansible is set up on the control machine:
      ```bash
