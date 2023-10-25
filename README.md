@@ -71,6 +71,8 @@ ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX
 
 5. **[Check Presearch Dashboard](https://nodes.presearch.com/dashboard?rid=4613404)** You should see the new nodes appear after each succesful installation.
 
-6. **Click** Stake button next to each node to add at least 4,000 PRE and update the description with a user-friendly name.
-7. **Click** Stats button next to each node to see IP address and other information.
+![image](https://github.com/88plug/presearch-node-ansible-playbook/assets/19512127/62f94bc8-28fa-4c44-b280-161c52afbbc2)
+
+7. **Click** Stake button next to each node to add at least 4,000 PRE and update the description with a user-friendly name.
+8. **Click** Stats button next to each node to see IP address and other information.
 
