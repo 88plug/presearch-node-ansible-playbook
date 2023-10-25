@@ -1,9 +1,30 @@
-# Setup a Presearch node on any VPS with Ansible Playbook
+# Setup a [Presearch](https://presearch.com/signup?rid=4613404) node on any VPS with this Ansible playbook
+[![image](https://github.com/88plug/presearch-node-ansible-playbook/assets/19512127/1ff18269-7e08-4135-ad1d-858df85c171f)
+](https://presearch.com/signup?rid=4613404) 
 
-## Requirements: 
-### - A control machine (Linux for now), this is used to create the hosts.ini file and where you run the Ansible Playbook against the VPS.
-### - Presearch Nodes: [VPS](https://my.racknerd.com/aff.php?aff=9475) / 
-### - `apt-get install ansible` on the control machine.
+# Prerequisites for Setup:
+
+1. **Control Machine**: 
+   - Must be Linux-based.
+   - Used to generate the `hosts.ini` file.
+   - This is where you'll run the Ansible Playbook targeting the VPS.
+   - Ensure Ansible is set up on the control machine:
+     ```bash
+     apt-get install ansible
+     ```
+2. **VPS Configuration**:
+   - Requires at least one VPS.
+   - Freshly installed with either Debian 9/10 or Ubuntu Server 18.04/20.04.
+
+3. **IP Configuration**:
+   - Currently supports a single IPv4 address only per VPS.
+
+
+### **VPS Provider Recommendations:**
+[HostHatch](https://cloud.hosthatch.com/a/1577) |
+[Racknerd](https://my.racknerd.com/aff.php?aff=9475) |
+[Vultr](https://www.vultr.com/?ref=7703094) |
+[DigitalOcean](https://m.do.co/c/d9874e8ceba7)
 
 ## Installation: 
 
