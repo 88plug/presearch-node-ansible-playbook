@@ -9,7 +9,7 @@
    - Install Metamask
    - Click 'Import tokens' in the wallet
    - On the top header click "Custom token"
-   - Paste the Presearch (PRE) Contract Address : 0xEC213F83defB583af3A000B1c0ada660b1902A0F and click "Next"
+   - Paste the Presearch (PRE) Contract Address : `0xEC213F83defB583af3A000B1c0ada660b1902A0F` and click "Next" and then "Import".
    - Swap your Ethereum, USDT, or WETH for at least 4,000 PRE
    - Each additional node requires at least 4,000 PRE
 
