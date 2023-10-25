@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Extract hosts from hosts.ini under [racknerd] group
-hosts=$(awk '/\[presearch-nodes\]/ {flag=1; next} /^$/ {flag=0} flag' hosts.ini)
+hosts=$(awk '/\[presearch_nodes\]/ {flag=1; next} /^$/ {flag=0} flag' hosts.ini)
 
 IFS=$'\n'       # Set Internal Field Separator to newline for the loop
 for host in $hosts; do
