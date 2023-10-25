@@ -9,13 +9,14 @@
    - Install Metamask
    - Click 'Import tokens' in the wallet
    - On the top header click "Custom token"
-   - Paste the Presearch (PRE) Contract Address : `0xEC213F83defB583af3A000B1c0ada660b1902A0F` and click "Next" and then "Import".
+   - Paste the Presearch (PRE) Contract Address : `0xEC213F83defB583af3A000B1c0ada660b1902A0F`
+   - Click "Next" and then "Import"
    - Swap your Ethereum, USDT, or WETH for at least 4,000 PRE
    - Each additional node requires at least 4,000 PRE
 
 2. **[Presearch Account](https://presearch.com/signup?rid=4613404)**: 
    - Signup and get familiar with the interface.
-   - You must deposit at least 4,000 PRE from Metamask to your [deposit address](https://keywords.presearch.com/transfer-tokens/blockchain?rid=4613404).
+   - You must now deposit at least 4,000 PRE from Metamask to your [Presearch deposit address](https://keywords.presearch.com/transfer-tokens/blockchain?rid=4613404).
    - Once the PRE has arrived to your account it will be visible in you [account wallet](https://account.presearch.com/tokens/pre-wallet?rid=4613404).
 
 3. **Control Machine**: 
