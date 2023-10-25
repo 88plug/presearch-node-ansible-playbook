@@ -2,12 +2,23 @@
 [![image](https://github.com/88plug/presearch-node-ansible-playbook/assets/19512127/1ff18269-7e08-4135-ad1d-858df85c171f)
 ](https://presearch.com/signup?rid=4613404) 
 
-# Prerequisites for Setup:
 
-1. **[Presearch Account](https://presearch.com/signup?rid=4613404)**: Signup and then goto the [dashboard](https://nodes.presearch.com/dashboard?rid=4613404). Copy and Save this to the side - we will need it later.
+# Requirements for Setup:
 
+1. **[MetaMask](https://metamask.io/)**:
+   - Install Metamask
+   - Click 'Import tokens' in the wallet
+   - On the top header click "Custom token"
+   - Paste the Presearch (PRE) Contract Address : 0xEC213F83defB583af3A000B1c0ada660b1902A0F and click "Next"
+   - Swap your Ethereum, USDT, or WETH for at least 4,000 PRE
+   - Each additional node requires at least 4,000 PRE
 
-2. **Control Machine**: 
+2. **[Presearch Account](https://presearch.com/signup?rid=4613404)**: 
+   - Signup and get familiar with the interface.
+   - You must deposit at least 4,000 PRE from Metamask to your [deposit address](https://keywords.presearch.com/transfer-tokens/blockchain?rid=4613404).
+   - Once the PRE has arrived to your account it will be visible in you [account wallet](https://account.presearch.com/tokens/pre-wallet?rid=4613404).
+
+3. **Control Machine**: 
    - Must be Linux-based.
    - Used to generate the `hosts.ini` file.
    - This is where you'll run the Ansible Playbook targeting the VPS.
@@ -16,11 +27,11 @@
      apt-get install ansible
      ```
 
-3. **VPS/VM Minimum Requirements**:
+4. **VPS/VM Minimum Requirements**:
    - 1 CPU | 1GB Memory | 10GB SSD/NVMe Disk
    - Debian 9/10 or Ubuntu Server 18.04/20.04
 
-4. **IP Configuration**:
+5. **IP Configuration**:
    - Currently supports a single IPv4 address only per VPS.
 
 ### **VPS Provider Recommendations:**
