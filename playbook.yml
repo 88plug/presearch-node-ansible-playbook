@@ -1,0 +1,270 @@
+---
+- hosts: all
+  become: true
+  tasks:
+
+    - name: Ensure the system timezone is set to UTC
+      ansible.builtin.timezone:
+        name: Etc/UTC
+      tags: 
+        - timezone
+
+    - name: Update and upgrade all packages
+      apt:
+        upgrade: dist
+        update_cache: yes
+        cache_valid_time: 3600
+        autoclean: yes
+        autoremove: yes
+      environment:
+        DEBIAN_FRONTEND: noninteractive
+      tags: 
+        - apt
+
+    - name: Upgrade all packages non-interactively and install additional tools
+      apt:
+        name:
+          - htop
+          - bmon
+          - jq
+          - iotop
+          - bleachbit
+          - logrotate
+          - ansible
+          - ufw
+          - fail2ban
+          - docker.io
+          - docker-compose
+        state: present
+        update_cache: yes
+        force_apt_get: yes
+      environment:
+        DEBIAN_FRONTEND: noninteractive
+      tags: 
+        - apt
+
+#Firewall hard
+
+    - name: Install UFW
+      apt:
+        name: ufw
+        state: present
+      tags: 
+        - ufw
+
+    - name: Set UFW default incoming policy to deny
+      ufw:
+        direction: incoming
+        policy: deny
+      tags: 
+        - ufw
+
+    - name: Set UFW default outgoing policy to allow
+      ufw:
+        direction: outgoing
+        policy: allow
+      tags: 
+        - ufw
+
+    - name: Allow SSH through UFW
+      ufw:
+        rule: allow
+        port: 22
+        proto: tcp
+      tags: 
+        - ufw
+
+    - name: Enable UFW
+      ufw:
+        state: enabled
+      tags: 
+        - ufw
+
+    - name: Install fail2ban
+      apt:
+        name: fail2ban
+        state: present
+      tags: 
+        - fail2ban
+
+    - name: Configure fail2ban for permanent jailing
+      copy:
+        dest: /etc/fail2ban/jail.local
+        content: |
+          [DEFAULT]
+          bantime  = -1
+        owner: root
+        group: root
+        mode: 0644
+      tags: 
+        - fail2ban
+
+    - name: Ensure fail2ban service is enabled and running
+      service:
+        name: fail2ban
+        state: started
+        enabled: true
+      tags: 
+        - fail2ban
+
+# Set GRUB timeout to 0 seconds for near-instant booting
+    - name: Set GRUB timeout
+      lineinfile:
+        path: /etc/default/grub
+        regexp: '^GRUB_TIMEOUT='
+        line: 'GRUB_TIMEOUT=0'
+      tags: 
+        - grub-timeout
+
+#TIME
+    - name: Ensure chrony (NTP) package is installed
+      apt:
+        name: chrony
+        state: present
+      tags: 
+        - ntp
+
+    - name: Ensure chrony service is enabled and running
+      service:
+        name: chronyd
+        state: started
+        enabled: true
+      tags: 
+        - ntp
+
+    - name: Force an immediate synchronization of the time
+      command:
+        cmd: chronyc makestep
+      changed_when: false
+      tags: 
+        - ntp
+
+    - name: Check if NTP is synchronized
+      command: chronyc tracking
+      register: ntp_status
+      changed_when: false
+      tags: 
+        - ntp
+
+    - name: Display NTP synchronization status
+      debug:
+        var: ntp_status.stdout_lines
+      tags: 
+        - ntp
+
+#LIMITS
+    - name: Increase max FD limit / ulimit
+      blockinfile:
+        path: "/etc/security/limits.conf"
+        block: |
+          * soft     nproc          1048576
+          * hard     nproc          1048576
+          * soft     nofile         1048576
+          * hard     nofile         1048576
+          root soft     nproc          unlimited
+          root hard     nproc          unlimited
+          root soft     nofile         unlimited
+          root hard     nofile         unlimited
+      tags: 
+        - tune-filesystem-limits
+
+    - name: Add sysctl.conf parameters
+      sysctl:
+        name: "{{ item.name }}"
+        value: "{{ item.value }}"
+        state: present
+        sysctl_set: yes
+        reload: yes
+      loop:
+        - { name: 'vm.min_free_kbytes', value: '131072' } #128Mb Memory Reserve
+        - { name: 'vm.swappiness', value: '0' }
+        - { name: 'fs.inotify.max_queued_events', value: '1048576' }
+        - { name: 'fs.inotify.max_user_instances', value: '1048576' }
+        - { name: 'fs.inotify.max_user_watches', value: '1048576' }
+        - { name: 'vm.max_map_count', value: '262144' }
+        - { name: 'fs.aio-max-nr', value: '524288' }
+      tags: 
+        - tune-kernel-limits
+
+
+
+    - name: Clear all journald logs
+      command: journalctl --vacuum-time=1s
+      tags: 
+        - clear-journald-logs
+
+    - name: Mask and stop systemd-journald
+      systemd:
+        name: systemd-journald
+        enabled: no
+        state: stopped
+        masked: yes
+      tags: 
+        - disable-systemd-journald
+
+    - name: Configure Docker to not store logs
+      copy:
+        dest: /etc/docker/daemon.json
+        content: |
+          {
+            "log-driver": "none"
+          }
+        owner: root
+        group: root
+        mode: 0644
+      tags: 
+        - disable-docker-logs
+
+ 5. Additional Cleanup and Maintenance Tasks
+    - name: Run BleachBit
+      command: bleachbit --clean system.rotated_logs system.cache apt.*
+      ignore_errors: yes
+      tags: 
+        - bleachbit
+
+    - name: Restart server
+      reboot:
+        msg: "Rebooting to apply system changes"
+        connect_timeout: 5
+        reboot_timeout: 300
+        post_reboot_delay: 30
+        test_command: uptime
+      tags: 
+        - reboot
+
+    - name: Stop and remove existing Presearch containers
+      docker_container:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - presearch-node
+        - presearch-auto-updater
+      tags: 
+        - presearch
+
+    - name: Start Watchtower container
+      docker_container:
+        name: watchtower
+        image: containrrr/watchtower
+        state: started
+        restart: yes
+        restart_policy: unless-stopped
+        volumes:
+          - "/var/run/docker.sock:/var/run/docker.sock"
+        command: "--cleanup --interval 900 presearch-node"
+      tags: 
+        - presearch
+
+    - name: Start Presearch Node container
+      docker_container:
+        name: presearch-node
+        image: presearch/node
+        state: started
+        restart: yes
+        restart_policy: unless-stopped
+        volumes:
+          - "presearch-node-storage:/app/node"
+        env:
+          REGISTRATION_CODE: "{{ PRESEARCH_REGISTRATION_CODE }}"
+      tags: 
+        - presearch
