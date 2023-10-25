@@ -43,7 +43,7 @@ cd presearch-node-ansible-playbook
 nano hosts.ini
 ```
 
-3. **Run** Enter the password for each server when prompted.
+3. **Run** add-key.sh to copy your public key to each server.
 ```
 chmod +x add-key.sh && ./add-key.sh
 ```
