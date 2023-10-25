@@ -2,8 +2,8 @@
 [![image](https://github.com/88plug/presearch-node-ansible-playbook/assets/19512127/1ff18269-7e08-4135-ad1d-858df85c171f)
 ](https://presearch.com/signup?rid=4613404) 
 
-
 # Requirements for Setup:
+
 
 1. **[MetaMask](https://metamask.io/)**:
    - Install Metamask
@@ -31,15 +31,14 @@
 4. **VPS/VM Minimum Requirements**:
    - 1 CPU | 1GB Memory | 10GB SSD/NVMe Disk
    - Debian 9/10 or Ubuntu Server 18.04/20.04
-
-5. **IP Configuration**:
-   - Currently supports a single IPv4 address only per VPS.
-
-### **VPS Provider Recommendations:**
-[HostHatch](https://cloud.hosthatch.com/a/1577) |
+   - [HostHatch](https://cloud.hosthatch.com/a/1577) |
 [Racknerd](https://my.racknerd.com/aff.php?aff=9475) |
 [Vultr](https://www.vultr.com/?ref=7703094) |
 [DigitalOcean](https://m.do.co/c/d9874e8ceba7)
+
+5. **IP Configuration**:
+   - Currently the Ansible playbook only supports a single IPv4 address only per VPS.
+
 
 
 ## Installation:
