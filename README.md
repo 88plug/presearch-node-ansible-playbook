@@ -78,7 +78,7 @@ ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX
 
 ---
 
-# Succesful outputs looks like this:
+## Succesful output example:
 ```
 PLAY [all] ***************************************************************************************************************************************************************************************************************************************************
 
@@ -193,9 +193,9 @@ PLAY RECAP *********************************************************************
 root@45.32.129.161         : ok=28   changed=14   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-# Tags in the Playbook
+## Tags in the Playbook
 
-## In the Ansible playbook, various tasks are organized with tags. Using these tags, you can run specific sections of the playbook. Below is a description of each tag:
+### In the Ansible playbook, various tasks are organized with tags. Using these tags, you can run specific sections of the playbook. Below is a description of each tag:
 
     timezone:
         Ensures the system timezone is set to UTC.
