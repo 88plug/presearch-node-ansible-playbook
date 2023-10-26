@@ -1,0 +1,70 @@
+---
+- name: Benchmark Tests Playbook
+  hosts: all
+  tasks:
+    - name: Install necessary packages
+      apt:
+        name: ['wget', 'curl', 'script']
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Run ServerBench
+      block:
+        - name: Download ServerBench script
+          get_url:
+            url: "https://raw.githubusercontent.com/K4Y5/ServerBench/master/serverbench.sh"
+            dest: "/tmp/serverbench.sh"
+            mode: '0755'
+        - name: Execute ServerBench and save output
+          command: "script -c '/tmp/serverbench.sh' -q /tmp/serverbench_output.txt"
+        - name: Fetch ServerBench results to local machine
+          fetch:
+            src: "/tmp/serverbench_output.txt"
+            dest: "./serverbench_output.txt"
+            flat: yes
+      tags:
+        - serverbench
+
+    - name: Run Nench and save output
+      command: "script -c 'curl -s wget.racing/nench.sh | bash' -q /tmp/nench_output.txt"
+      tags:
+        - nench
+    - name: Fetch Nench results to local machine
+      fetch:
+        src: "/tmp/nench_output.txt"
+        dest: "./nench_output.txt"
+        flat: yes
+      tags:
+        - nench
+
+    - name: Run Bench.sh and save output
+      command: "script -c 'wget -qO- bench.sh | bash' -q /tmp/benchsh_output.txt"
+      tags:
+        - benchsh
+    - name: Fetch Bench.sh results to local machine
+      fetch:
+        src: "/tmp/benchsh_output.txt"
+        dest: "./benchsh_output.txt"
+        flat: yes
+      tags:
+        - benchsh
+
+    - name: Run YABS and save output
+      command: "script -c 'wget -qO- yabs.sh | bash' -q /tmp/yabs_output.txt"
+      tags:
+        - yabs
+    - name: Fetch YABS results to local machine
+      fetch:
+        src: "/tmp/yabs_output.txt"
+        dest: "./yabs_output.txt"
+        flat: yes
+      tags:
+        - yabs
+
+    - name: Display Results
+      debug:
+        msg:
+          - "ServerBench Result: {{ lookup('file', './serverbench_output.txt') }}"
+          - "Nench Result: {{ lookup('file', './nench_output.txt') }}"
+          - "Bench.sh Result: {{ lookup('file', './benchsh_output.txt') }}"
+          - "YABS Result: {{ lookup('file', './yabs_output.txt') }}"
