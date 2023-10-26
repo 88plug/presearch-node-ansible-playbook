@@ -78,7 +78,7 @@ ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX
 
 ---
 
-Succesful outputs looks like this:
+# Succesful outputs looks like this:
 ```
 PLAY [all] ***************************************************************************************************************************************************************************************************************************************************
 
@@ -191,4 +191,63 @@ changed: [root@45.32.129.161]
 
 PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************
 root@45.32.129.161         : ok=28   changed=14   unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+# Tags in the Playbook
+
+## In the Ansible playbook, various tasks are organized with tags. Using these tags, you can run specific sections of the playbook. Below is a description of each tag:
+
+    timezone:
+        Ensures the system timezone is set to UTC.
+
+    apt:
+        Tasks related to the APT package manager.
+        Updates and upgrades all system packages.
+        Installs additional tools such as htop, bmon, jq, etc.
+
+    ufw:
+        Firewall configurations using UFW (Uncomplicated Firewall).
+        Sets default policies, allows SSH, and ensures the firewall is enabled.
+
+    fail2ban:
+        Installs and configures fail2ban for security.
+        Configures fail2ban for permanent jailing of IP addresses that fail authentication.
+
+    grub-timeout:
+        Sets the GRUB bootloader timeout to 0 seconds for faster booting.
+
+    ntp:
+        Ensures the chrony (NTP) package is installed for time synchronization.
+        Forces immediate time synchronization and displays the NTP status.
+
+    tune-filesystem-limits:
+        Increases the system's file descriptor limits for better performance.
+
+    tune-kernel-limits:
+        Adjusts various kernel parameters using sysctl for optimized performance.
+
+    clear-journald-logs:
+        Clears all systemd journald logs.
+
+    disable-systemd-journald:
+        Masks and stops the systemd-journald service.
+
+    disable-docker-logs:
+        Configures Docker to not store logs.
+
+    bleachbit:
+        Runs the BleachBit system cleaning tool.
+
+    reboot:
+        Reboots the server to apply system changes.
+
+    presearch:
+        Manages Docker containers related to Presearch, including stopping/removing and starting them.
+
+To run specific sections of the playbook, use the --tags option with the ansible-playbook command. For example, to only run the timezone tasks:
+
+## Run tags like reboot for example.
+
+```
+ansible-playbook -i hosts.ini playbook.yml -e "PRESEARCH_REGISTRATION_CODE=XXXXX" --tags reboot
 ```
